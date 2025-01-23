@@ -19,18 +19,24 @@
       <h1 class="title">Generate a</h1>
       <h1 class="title title2">random password</h1>
       <p class="subtitle">Never use an insecure password again.</p>
+
       <button onclick="generatePassword()">Generate Passwords</button>
+
       <input
         id="passwordLength"
         type="number"
         placeholder="Password Length"
         min="3"
-        max="30"
+        max="20"
       />
-      <input type="checkbox" id="symbols" />
-      <label for="symbols">Symbols</label>
-      <input type="checkbox" id="numbers" />
-      <label for="symbols">Numbers</label>
+
+      <div class="options">
+        <input type="checkbox" id="symbols" />
+        <label for="symbols">Symbols</label>
+        <input type="checkbox" id="numbers" />
+        <label for="symbols">Numbers</label>
+      </div>
+
       <hr />
       <div class="password-container">
         <p id="password1"></p>

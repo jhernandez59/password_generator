@@ -88,11 +88,10 @@ hr {
 }
 
 #passwordLength {
-  width: 180px;
+  width: 190px;
   height: 42px;
 
   text-align: center;
-
   margin-left: 7px;
 
   font-family: "Inter", sans-serif;
@@ -105,4 +104,9 @@ hr {
   border: none; /* Elimina cualquier borde predeterminado */
   padding: 4px 16px; /* Ajusta el relleno del botón */
   border-radius: 6px; /* Ajusta el redondeo de las esquinas del botón */
+}
+
+.options {
+  color: #55f991;
+  margin-top: 20px;
 }

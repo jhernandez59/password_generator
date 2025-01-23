@@ -51,16 +51,10 @@ const characters = [
   "x",
   "y",
   "z",
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
+];
+
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const symbols = [
   "~",
   "`",
   "!",
@@ -92,10 +86,48 @@ const characters = [
   "/",
 ];
 
+// Escuchar cambio en input passwordLength
+let passwordLength;
+let passwordLengthEl = document.getElementById("passwordLength");
+passwordLengthEl.addEventListener("input", function () {
+  passwordLength = parseInt(passwordLengthEl.value, 10); // 10 es la base decimal
+
+  console.log("Longitud de la contraseña:", passwordLength);
+});
+if (isNaN(passwordLength)) {
+  passwordLength = 7;
+}
+
+// Escuchar cambio en checkbox symbols
+let isSymbolsElChecked;
+let symbolsEl = document.getElementById("symbols");
+symbolsEl.addEventListener("change", function () {
+  isSymbolsElChecked = symbolsEl.checked;
+
+  if (isSymbolsElChecked) {
+    console.log("Symbols está seleccionado.");
+  } else {
+    console.log("Symbols NO está seleccionado.");
+  }
+});
+
+// Escuchar cambio en checkbox numbers
+let isNumbersElChecked;
+let numbersEl = document.getElementById("numbers");
+numbersEl.addEventListener("change", function () {
+  isNumbersElChecked = numbersEl.checked;
+
+  if (isNumbersElChecked) {
+    console.log("Numbers está seleccionado.");
+  } else {
+    console.log("Numbers NO está seleccionado.");
+  }
+});
+
+//
 let passwordEl1 = document.getElementById("password1");
 let passwordEl2 = document.getElementById("password2");
 
-let passwordLength = 15;
 passwordEl1.textContent = "";
 passwordEl2.textContent = "";
 
@@ -104,23 +136,31 @@ function generatePassword() {
   passwordEl1.textContent = "";
   passwordEl2.textContent = "";
 
+  let charsSet = [];
+
+  if (!isSymbolsElChecked && !isNumbersElChecked) {
+    charsSet = characters;
+  }
+
+  if (isSymbolsElChecked && !isNumbersElChecked) {
+    charsSet = [...characters, ...symbols];
+  }
+
+  if (isNumbersElChecked && !isSymbolsElChecked) {
+    charsSet = [...characters, ...numbers];
+  }
+
+  if (isSymbolsElChecked && isNumbersElChecked) {
+    charsSet = [...characters, ...symbols, ...numbers];
+  }
+
   for (let i = 0; i < passwordLength; i++) {
     passwordEl1.textContent +=
-      characters[Math.floor(Math.random() * characters.length)];
+      charsSet[Math.floor(Math.random() * charsSet.length)];
     passwordEl2.textContent +=
-      characters[Math.floor(Math.random() * characters.length)];
+      charsSet[Math.floor(Math.random() * charsSet.length)];
   }
 }
-
-// Función para cambiar la longitud de la contraseña
-function changePasswordLength() {
-  passwordLength = document.getElementById("passwordLength").value;
-}
-
-// Evento para generar contraseñas al hacer clic en el botón
-document
-  .getElementById("passwordLength")
-  .addEventListener("input", changePasswordLength);
 
 // Adicionar evento para copiar texto al portapapeles
 passwordEl1.addEventListener("click", copyClipboard1);
